@@ -1,0 +1,6 @@
+{
+  "mongoConfig": {
+    "database": "HobokenCurbside",
+    "serverURL": "mongodb://localhost:27017"
+  }
+}
