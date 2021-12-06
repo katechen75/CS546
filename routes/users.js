@@ -5,7 +5,7 @@ const users = require("../data/users");
 //Home Page Route
 router.get("/", async (req, res) => {
     if (req.session.user) {
-        res.redirect('/private');
+        res.render('users/homePage');
     } else {
         res.render('users/homePage')
     }
@@ -178,5 +178,94 @@ router.post("/signup", async (req, res) => {
 });
 
 
+//get /private
+router.get("/private", async (req, res) => {
+    if (req.session.user){
+        res.render('users/userPage', {user: req.session.user});
+    }
+});
+
+
+//get /post
+router.get("/posting", async (req, res) => {
+    if (req.session.user){
+        res.render('users/postingPage');
+    }
+});
+
+
+//SignUp Page POST Route
+router.post("/posting", async (req, res) => {
+    // let username = req.body.username;
+    // let password = req.body.password;
+
+    // if ((username) && (password)){
+
+    //     if ((!username) || (!username)) {
+    //         res.status(400).render('users/signupPage', {error: 'No Username/Password inputted!'});
+    //         return;
+    //     }
+    //     if ((typeof username != 'string') || (!username.trim().length)) {
+    //         res.status(400).render('users/signupPage', {error: 'Username/Password inputted incorrectly'});
+    //         return;
+    //     }
+
+    //     if ((typeof password != 'string') || (!password.trim().length)) {
+    //         res.status(400).render('users/signupPage', {error: 'Username/Password inputted incorrectly'});
+    //         return;
+    //     }
+
+    //     if (username.indexOf(' ') >=0){
+    //         res.status(400).render('users/signupPage', {error: 'Username/Password inputted incorrectly'});
+    //         return;
+    //     }
+    //     if (password.indexOf(' ') >=0){
+    //         res.status(400).render('users/signupPage', {error: 'Username/Password inputted incorrectly'});
+    //         return;
+    //     }
+
+    //     if (username.length < 4){
+    //         res.status(400).render('users/signupPage', {error: 'Username/Password inputted incorrectly'});
+    //         return;
+    //     }
+    //     if (password.length < 6){
+    //         res.status(400).render('users/signupPage', {error: 'Username/Password inputted incorrectly'});
+    //         return;
+    //     }
+
+    //     var alphanum = /^[0-9a-zA-Z]+$/;
+    //     if (!username.match(alphanum)){
+    //         res.status(400).render('users/signupPage', {error: 'Username/Password inputted incorrectly'});
+    //         return;
+    //     }
+    // }
+    
+    try {
+        let createPost = await users.createPost(description, category, image, location);
+
+        if (!create){
+            res.status(500).render('users/signupPage', {error: 'Internal Server Error'});
+            return;
+
+        } else {
+            res.render('users/listingPage' , {description: description, category: category, image: image, location: location});
+            return;
+        }
+    }
+    catch (e) {
+        // if ((username == '') && (password == '')){
+        //     res.status(400).render('users/signupPage', {error: 'Username/Password must be provided.'});
+        //     return;
+        // }
+        // if ((!username) && (!password)){
+        //     res.status(400).render('users/signupPage', {error: 'Username/Password must be provided.'});
+        //     return;
+
+        // } else {
+        //     res.status(400).render('users/signupPage', {error: e});
+        //     return;
+        // }
+    }
+});
 
 
