@@ -37,6 +37,26 @@ let exportedMethods = {
 
         return finComment;
     }
+   async deleteComment(commentId) {
+        if (!verify.validString(commentId)) throw 'Comment id is not a valid string.';
+        
+        const commentCollection = await comments();
+        const deletionInfo = await commentCollection.deleteOne({ _id: ObjectId(commentId) });
+        if (deletionInfo.deletedCount === 0) throw `Could not delete comment with id of ${commentId}.`;
+
+        return; 
+    },
+     async getAllCommentsOfReview(reviewId) {
+        if (!verify.validString(reviewId)) throw 'Review id is not a valid string.';
+        
+        const commentCollection = await comments();
+        const commentList = await commentCollection.find({'reviewId': { $eq: reviewId}}).toArray();
+        for (let x of commentList) {
+            x._id = x._id.toString();
+        }
+
+        return commentList;
+    },
 };
 
 module.exports = exportedMethods;
