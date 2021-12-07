@@ -1,5 +1,5 @@
-function validString(str) {
-    if (!str || typeof str !== 'string' || !str.trim()) return false;
+function validString(strng) {
+    if (!strng || typeof strng !== 'string' || !strng.trim()) return false;
     return true;
 }
 
@@ -13,7 +13,7 @@ function convertId(doc) {
     return doc;
 }
 
-function validAge(age){
+/*function validAge(age){
     if (!age || typeof age != 'number' || !Number.isInteger(age) || age < 1) return false;
     return true;
 }
@@ -21,7 +21,7 @@ function validAge(age){
 function validRating(num){
     if (!num || (typeof num != 'number') || !Number.isInteger(num) || num < 1 || num > 5) return false;
     return true;
-}
+}*/
 
 function validEmail(email) {
     if (!validString(email)) return false;
@@ -55,10 +55,10 @@ function generateList(n) {
 module.exports = {
     validString,
     convertId,
-    validAge,
-    validEmail,
+    //validAge,
+    //validEmail,
     validBoolean,
-    validRating,
+    //validRating,
     validMetrics,
     validLink,
     generateList
