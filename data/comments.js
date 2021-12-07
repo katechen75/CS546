@@ -21,22 +21,23 @@ let exportedMethods = {
 
         return comment;
     },
-  async createComment(reviewId, userId, text) {
-        if (!verify.validString(reviewId)) throw 'Review id is not a valid string.';
+   //create interaction
+  async createComment(postId, userId, text) {
+        if (!verify.validString(postId)) throw 'Post id is not a valid string.';
         if (!verify.validString(userId))   throw 'User id is not a valid string.';
         if (!verify.validString(text))     throw 'Text is not a valid string.';
         
-        /* Add new comment to DB */
-        let newComment = {reviewId: reviewId, userId: userId, text: text};
+        let newComment = {postId: postId, userId: userId, text: text};
         const commentCollection = await comments();
         const insertInfo = await commentCollection.insertOne(newComment);
         if (insertInfo.insertedCount === 0) throw 'Could not add comment.';
     
         const newId = insertInfo.insertedId;
-        const finComment = await this.getCommentById(newId.toString());
+        const findComment = await this.getCommentById(newId.toString());
 
-        return finComment;
+        return findComment;
     }
+    //remove interaction
    async deleteComment(commentId) {
         if (!verify.validString(commentId)) throw 'Comment id is not a valid string.';
         
@@ -46,13 +47,13 @@ let exportedMethods = {
 
         return; 
     },
-     async getAllCommentsOfReview(reviewId) {
-        if (!verify.validString(reviewId)) throw 'Review id is not a valid string.';
+     async getAllComments(postId) {
+        if (!verify.validString(postId)) throw 'Post id is not a valid string.';
         
         const commentCollection = await comments();
-        const commentList = await commentCollection.find({'reviewId': { $eq: reviewId}}).toArray();
-        for (let x of commentList) {
-            x._id = x._id.toString();
+        const commentList = await commentCollection.find({'postId': { $eq: postId}}).toArray();
+        for (let i of commentList) {
+            i._id = i._id.toString();
         }
 
         return commentList;
