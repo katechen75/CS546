@@ -29,21 +29,22 @@ app.use('/login', (req, res, next) => {
     if (req.session.user) {
         return res.redirect('/private');
     } else {
-        req.method = 'POST';
+        //return res.redirect('/login')
+        req.method = 'GET';
         next();
     }
 });
 
-// app.use(async (req, res, next) => {
-//     let authStatus = "";
-//     if (req.session.user) {
-//         authStatus = "Authenticated User";
-//     } else {
-//         authStatus = "Non-Authenticated User";
-//     }
-//     console.log('['+ new Date().toUTCString() + ']: ' + req.method + ' ' + req.originalUrl + ' (' + authStatus + ')');
-// 	next();
-// });
+app.use(async (req, res, next) => {
+    let authStatus = "";
+    if (req.session.user) {
+        authStatus = "Authenticated User";
+    } else {
+        authStatus = "Non-Authenticated User";
+    }
+    console.log('['+ new Date().toUTCString() + ']: ' + req.method + ' ' + req.originalUrl + ' (' + authStatus + ')');
+	next();
+});
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
