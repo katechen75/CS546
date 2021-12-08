@@ -23,10 +23,13 @@ let exportedMethods = {
       let casetestName = username.toLowerCase()
       const userCollection = await users();
       const userList = await userCollection.find({}).toArray();
-      for(let i=0;i<userList.length;i++)
-      {
+
+      if(userList.length >=1){
+        for(let i=0;i<userList.length;i++){
         if(userList[i].username.toLowerCase()==casetestName) throw 'User name exists!'
+        }
       }
+
       let newUser = {
         username: username,
         password: hashPassword,

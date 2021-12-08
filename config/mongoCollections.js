@@ -15,5 +15,6 @@ module.exports = {
     restaurants: getCollectionFn('restaurants'),
     users: getCollectionFn('users'),
     reviews: getCollectionFn('reviews'),
-    comments: getCollectionFn('comments')
+    comments: getCollectionFn('comments'),
+    posts: getCollectionFn('posts')
 }

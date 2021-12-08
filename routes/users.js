@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const posts = require("../data/posts");
+const userdata = require("../data/users");
 
 //Home Page Route
 router.get("/", async (req, res) => {
@@ -34,22 +35,51 @@ router.post("/search", async (req, res) => {
 
 //LogIn Page POST Route
 router.post('/login', async (req, res) => {
-    
-     const loginName = req.body.username;
-     const loginPW = req.body.password;
-try{
-    const logintest = await userdata.checkUser(loginName,loginPW)
-        if(logintest=='{authenticated: true}'){
-        req.session.user = { username:loginName };
-        res.redirect('/private');
+    const loginName = req.body.username;
+    const loginPW = req.body.password;
+    try{
+        const logintest = await userdata.checkUser(loginName,loginPW)
+            if(logintest=='{authenticated: true}'){
+            req.session.user = { username:loginName };
+            res.redirect('/private');
+            }
+            else{
+            res.render('users/loginpage', { title: "Login Page" });
+            }
+    }
+    catch (e) {
+        res.render('users/loginpage', { title: "Login Page" });
+    }
+});
+
+
+//SignUp Page GET Route
+router.get('/signup', async (req, res) => {
+    try {
+        res.render('users/signupPage', { title: "Sign Up Page" });
+    } catch (e) {
+        res.sendStatus(500);
+    }
+});
+
+//SignUp Page POST Route
+router.post('/signup', async (req, res) => {
+    const signupName = req.body.username;
+    const signupPW = req.body.password1;
+    const email = req.body.email;
+    const gender = req.body.gender;
+    const city = req.body.city;
+    const NYcities = [];
+    const NJcities = [];
+    try {     
+     // res.status(400).render('pages/signup',{ title: "Sign Up Page" , hasErrors: true,errors:errors})   
+        const signuptest = await userdata.addUser(signupName,signupPW,email,gender,city);
+        if(signuptest=='{userInserted:true}'){
+        res.redirect('/login');
         }
-        else{
-          res.render('users/loginpage', { title: "Login Page" });
-        }
-}
-catch (e) {
-    res.render('users/loginpage', { title: "Login Page" });
-  }
+    } catch(e) {
+        res.status(500).json({ message: 'routes error' });
+    }
 });
 
 
