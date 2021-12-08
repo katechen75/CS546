@@ -7,17 +7,18 @@ router.get("/", async (req, res) => {
     if (req.session.user) {
         res.render('users/homePage');
     } else {
-        res.render('users/homePage')
+        try {
+            const allPosts = await posts.getAllPosts();
+            res.render('users/homePage', {posts:allPosts});
+        } catch (e) {
+            res.status(404);
+        }
     }
 });
 
 //LogIn Page Route
 router.get("/login", async (req, res) => {
-    if (req.session.user) {
-        res.render('users/homePage');
-    } else {
     res.render('users/loginPage')
-    }
 });
 
 //LogIn Page POST Route
