@@ -1,29 +1,30 @@
-<h1>Login Page</h1>
-    <div>
-        
-        {{!-- {{#if error}}
-            <div id="error">
-                <p>{{ error }}</p>
-            </div>
-        {{/if}} --}}
+<title>{{title}}</title>
+<link rel="stylesheet" href="/public/css/login.css"/>
+<body>
+<main>
+  <div class="login-box">
+    <h2>Login</h2>
+    <form id='login-form' action='/login' method="post">
+    <div class="login-field">
+     <input id="username" type="text" name="username"  >
+       <label>Username</label>
+        <p id="error_username" hidden></p>
+         </div>
+           <div class="login-field">
+            <input id="password" type="password" name="password" >
+           <label>Password</label>
+           <p id="error_password" hidden></p> 
+             </div>
+          <button type="submit">Login</button>
+    </form>
+   <a href="/signup">Need to register? Click here to sign-up</a>
+   </div>
+ </div>
+</main>
 
-        <form method="POST" action="/login" id="login-form">
-        
-            <div>
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username"/>
-            </div>
-
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password"/>
-            </div>
-
-            <button type="submit" value="submit">Log In</button>
-        </form>
-        <a href="/" id="homeLink">Go back to the Home Page</a>
-        <a href="/signup">Need to register? Click here to sign-up</a>
-    </div>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
-<script src="../../public/javascript/form.js"></script>
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+    <script src="/public/js/login.js"></script>
+  </body>
