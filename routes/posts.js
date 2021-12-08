@@ -78,6 +78,25 @@ let exportedMethods = {
       throw "Update failed";
     return this.getPostById(id);
   },
+
+
+//SEARCH POST
+  async searchPost(searchTerm) {
+    let searchPost = [];
+    
+    const posts = mongoCollections.posts;
+    const postCollection = await posts();
+    const post = await this.getAllPosts();
+  
+
+    for (let i=0; i<post.length; i++){
+      if ((post[i].title.toLowerCase().includes(searchTerm.toLowerCase())) || (post[i].description.toLowerCase().includes(searchTerm.toLowerCase()))){
+        searchPost.push(post[i]);
+      }
+    }
+
+    return searchPost;
+  },
 };
 
 module.exports = exportedMethods;
