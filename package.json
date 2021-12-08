@@ -1,0 +1,29 @@
+{
+    "name": "cs546-final",
+    "version": "1.0.0",
+    "description": "final project",
+    "main": "app.js",
+    "scripts": {
+      "seed": "node ./tasks/seed.js",
+      "start": "node app.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/katechen75/CS546.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.17.1",
+      "express-handlebars": "^3.1.0",
+      "handlebars": "^4.7.6",
+      "mongodb": "^3.6.2",
+      "express-session": "^1.17.0",
+      "bcryptjs": "^2.4.3",
+      "bcrypt": "^5.0.0",
+      "cookie-parser": "^1.4.5",
+      "uuid": "^3.3.2"
+    }
+  }
+  
