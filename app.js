@@ -3,6 +3,8 @@ const app = express();
 const session = require('express-session')
 const configRoutes = require('./routes');
 const exphbs = require('express-handlebars');
+const static = express.static(__dirname + '/public');
+app.use('/public', static);
 
 sess = {};
 
@@ -27,13 +29,20 @@ app.use('/private', (req, res, next) => {
 
 app.use('/login', (req, res, next) => {
     if (req.session.user) {
-        return res.redirect('/private');
+      return res.redirect('/private');
     } else {
-        //return res.redirect('/login')
-        req.method = 'GET';
-        next();
+      next();
     }
-});
+  });
+
+  app.use('/signup', (req, res, next) => {
+    if (req.session.user) {
+        console.log(req.session.user)
+      return res.redirect('/private');
+    } else {
+      next();
+    }
+  });
 
 app.use(async (req, res, next) => {
     let authStatus = "";
