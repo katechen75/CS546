@@ -1,4 +1,4 @@
-<h1>Sign-Up Page</h1>
+<h1>Make A Post!</h1>
     <div>
         
         {{!-- {{#if error}}
@@ -9,6 +9,10 @@
 
         <form method="POST" action="/posting" id="posting-form">
 
+            <div>
+                <label for="title">Item Name:</label>
+                <input type="text" name="title" id="title"/>
+            </div>
 
             <div>
                 <label for="description">Item Description:</label>
@@ -22,7 +26,7 @@
 
             <div>
                 <label for="item_image">Item Image:</label>
-                <input type="image" name="item_image" id="item_image"/>
+                <input type="file" name="item_image" id="item_image"/>
             </div>
 
             <div>
@@ -32,8 +36,8 @@
 
 
             
-            <button type="submit" value="submit">Sign Up</button>
+            <button type="submit" value="submit">Post</button>
         </form>
 
-        <a href="/login">Already have an account? Click here to log-in</a>
+        <a href="/private">Go back to user page.</a>
     </div>

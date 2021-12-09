@@ -18,7 +18,15 @@ let exportedMethods = {
     if (!user) throw "User not found";
     return user;
   },
- async addUser(username, password,email,gender,city) {
+
+  async getUserByUserName(username) {
+    const userCollection = await users();
+    const user = await userCollection.findOne({ username: username });
+    if (!user) throw "User not found";
+    return user;
+  },
+
+  async addUser(username, password,email,gender,city) {
       const hashPassword = await bcrypt.hash(password, saltRounds);
       let casetestName = username.toLowerCase()
       const userCollection = await users();
@@ -53,7 +61,7 @@ let exportedMethods = {
       if(username.substring(0,2)=='  ') throw 'password can not be spaces!'
       if(!password) throw 'You must input a password!'
       if(typeof(password)!=='string') throw 'invalid password!'
-      if(password.length<7) throw 'password should be at least 6 characters long'
+      if(password.length<6) throw 'password should be at least 6 characters long'
       for(let i=0;i<password.length;i++){
         if(password[i]==' ') throw 'password input can not be spaces!'
       }            

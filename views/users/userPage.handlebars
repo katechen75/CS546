@@ -1,4 +1,23 @@
 <h1>User Info</h1>
 <p>{{user.username}}</p>
+<p>Posts Made By the User:</p>
+{{#if userPost}}
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Item Description</th>
+            <th>Item Location</th>
+            <th>Poster</th>
+        </tr>
+        {{#each userPost}}
+            <tr>
+                <th>{{title}}</th>
+                <th>{{description}}</th>
+                <th>{{location}}</th>
+                <th>{{poster.name}}</th>
+            </tr>
+            {{/each}}
+        </table>
+        {{/if}}
 <a href="/logout">Logout</a>
 <a href="/posting">Click here to make a post</a>

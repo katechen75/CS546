@@ -2,6 +2,7 @@ const mongoCollections = require("../config/mongoCollections");
 const posts = mongoCollections.posts;
 const users = require("./users");
 const uuid = require("uuid");
+const { ObjectId } = require('mongodb');
 
 let exportedMethods = {
 
@@ -22,20 +23,37 @@ let exportedMethods = {
     return post;
   },
 
+  //GET BY ID
+  async getPostByPosterName(username) {
+    let allPosts = [];
+    const postCollection = await posts();
+    const post = await this.getAllPosts();
+  
+
+    for (let i=0; i<post.length; i++){
+      if (post[i].poster.name.toLowerCase().includes(username.toLowerCase())){
+        allPosts.push(post[i]);
+      }
+    }
+    if (!allPosts) throw "User has made no posts.";
+    return allPosts;
+  },
+
 
   //CREATE POST
-  async addPost(title, description, location, posterId) {
+  async addPost(title, description, category, image, location, username) {
     const postCollection = await posts();
-    const userThatPosted = await users.getUserById(posterId);
+    const userThatPosted = await users.getUserByUserName(username);
 
     let newPost = {
       title: title,
       description: description,
-      //imageURL: image,
+      category: category,
+      imageFile: image,
       location: location,
       poster: {
-        id: posterId,
-        name: `${userThatPosted.firstName} ${userThatPosted.lastName}`,
+        id: userThatPosted._id,
+        name: `${userThatPosted.username} ${userThatPosted.email}`,
       },
       _id: uuid.v4(),
     };
