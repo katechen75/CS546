@@ -2,17 +2,14 @@ const mongoCollections = require("../config/mongoCollections");
 const posts = mongoCollections.posts;
 const users = require("./users");
 const uuid = require("uuid");
-const { ObjectId } = require('mongodb');
+const { ObjectId } = require("mongodb");
 
 let exportedMethods = {
-
-
   //GET ALL
   async getAllPosts() {
     const postCollection = await posts();
     return await postCollection.find({}).toArray();
   },
-
 
   //GET BY ID
   async getPostById(id) {
@@ -28,17 +25,15 @@ let exportedMethods = {
     let allPosts = [];
     const postCollection = await posts();
     const post = await this.getAllPosts();
-  
 
-    for (let i=0; i<post.length; i++){
-      if (post[i].poster.name.toLowerCase().includes(username.toLowerCase())){
+    for (let i = 0; i < post.length; i++) {
+      if (post[i].poster.name.toLowerCase().includes(username.toLowerCase())) {
         allPosts.push(post[i]);
       }
     }
     if (!allPosts) throw "User has made no posts.";
     return allPosts;
   },
-
 
   //CREATE POST
   async addPost(title, description, category, image, location, username) {
@@ -64,7 +59,6 @@ let exportedMethods = {
     return this.getPostById(newInsertInformation.insertedId);
   },
 
-
   //REMOVE POST
   async removePost(id) {
     const postCollection = await posts();
@@ -73,7 +67,6 @@ let exportedMethods = {
       throw `Could not delete post with id of ${id}`;
     return true;
   },
-
 
   //UPDATE POST
   async updatePost(id, title, body, posterId) {
@@ -97,18 +90,19 @@ let exportedMethods = {
     return this.getPostById(id);
   },
 
-
-//SEARCH POST
+  //SEARCH POST
   async searchPost(searchTerm) {
     let searchPost = [];
-    
+
     const posts = mongoCollections.posts;
     const postCollection = await posts();
     const post = await this.getAllPosts();
-  
 
-    for (let i=0; i<post.length; i++){
-      if ((post[i].title.toLowerCase().includes(searchTerm.toLowerCase())) || (post[i].description.toLowerCase().includes(searchTerm.toLowerCase()))){
+    for (let i = 0; i < post.length; i++) {
+      if (
+        post[i].title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post[i].description.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
         searchPost.push(post[i]);
       }
     }

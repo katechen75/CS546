@@ -7,5 +7,5 @@ module.exports = {
   users: userData,
   posts: postData,
   comments: commentData,
-  location: locationData
+  location: locationData,
 };

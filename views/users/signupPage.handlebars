@@ -1,55 +1,61 @@
 <title>{{title}}</title>
-<link rel="stylesheet" href="/public/css/signup.css"/>
+<link rel="stylesheet" href="/public/css/signup.css" />
 <main>
-    <div class="signup-box">
+  <div class="signup-box">
     <h2>Sign up</h2>
 
-    <form id='signup-form' action='/signup' method = "POST" >
-    <div class="signup-field">
-     <input id="username" type="text" name="username" >
+    <form id="signup-form" action="/signup" method="POST">
+      <div class="signup-field">
+        <input id="username" type="text" name="username" />
         <label for="username">Username</label>
-         <p id="error_username" hidden></p>
-    </div>
+        <p id="error_username" hidden></p>
+      </div>
 
-    <div class="signup-field">
-     <input id="password1" type="password" name="password1" >
+      <div class="signup-field">
+        <input id="password1" type="password" name="password1" />
         <label for="password1">Password</label>
-         <p id="error_password1" hidden></p>
-    </div>
+        <p id="error_password1" hidden></p>
+      </div>
 
-    <div class="signup-field">
-     <input id="password2" type="password" name="password2" >
+      <div class="signup-field">
+        <input id="password2" type="password" name="password2" />
         <label for="password2">Repeat Your Password</label>
-         <p id="error_password2" hidden></p>
-    </div>
-    
-    <div class="signup-field">
-     <input id="email" type="text" name="email" >
-        <label for="email">Email</label>
-         <p id="error_email" hidden></p>
-    </div>
+        <p id="error_password2" hidden></p>
+      </div>
 
-    <div class="signup-field">
-     <input id="gender" type="text" name="gender" >
+      <div class="signup-field">
+        <input id="email" type="text" name="email" />
+        <label for="email">Email</label>
+        <p id="error_email" hidden></p>
+      </div>
+
+      <div class="signup-field">
+        <input id="gender" type="text" name="gender" />
         <label for="gender">Gender</label>
-         <p id="error_gender" hidden></p>
-    </div>
-    
-    <div class="signup-field">
-     <input id="city" type="text" name="city" >
+        <p id="error_gender" hidden></p>
+      </div>
+
+      <div class="signup-field">
+        <input id="city" type="text" name="city" />
         <label for="city">City</label>
-         <p id="error_city" hidden></p>
-    </div>
-    
-    <button type="submit">Sign up</button>
+        <p id="error_city" hidden></p>
+      </div>
+
+      <button type="submit">Sign up</button>
     </form>
 
     <a href="/">Already have an account? Click here to log-in</a>
-    </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
-    <script src="/public/js/signup.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+    integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+    crossorigin="anonymous"
+  ></script>
+  <script src="/public/js/signup.js"></script>
 </main>
