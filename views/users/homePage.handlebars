@@ -1,35 +1,97 @@
 <h1>Hoboken Curbside</h1>
-<div>
-  <p>A place for furniture and household items that have no home.</p>
-
-  {{#if posts}}
-    <table>
-      <tr>
-        <th>Item</th>
-        <th>Item Description</th>
-        <th>Item Location</th>
-        <th>Poster</th>
-      </tr>
-      {{#each posts}}
-        <tr>
-          <th>{{title}}</th>
-          <th>{{description}}</th>
-          <th>{{location}}</th>
-          <th>{{poster.name}}</th>
-        </tr>
-      {{/each}}
-    </table>
-  {{/if}}
-
-  <form method="POST" action="/search" id="search-form">
-
     <div>
-      <label for="search_item">Search Item:</label>
-      <input type="text" name="search_item" id="search_item" />
+        <a href="/login">Click here to login</a>
+        <p>A place for furniture & household items that have no home.</p>
+
+        {{#if posts}}
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Item Description</th>
+                    <th>Item Location</th>
+                    <th>Poster</th>
+                    <th>Link to Post</th>
+                </tr>
+                {{#each posts}}
+                <tr>
+                    <th>{{title}}</th>
+                    <th>{{description}}</th>
+                    <th>{{location}}</th>
+                    <th>{{poster.name}}</th>
+                    <th><a href="#{{title}}">Click to View Post</a></th>
+                </tr>
+                {{/each}}
+            </table>
+
+        {{/if}}
+
+
+        <form method="POST" action="/search" id="search-form">
+        
+            <div>
+                <label for="search_item">Search Item:</label>
+                <input type="text" name="search_item" id="search_item"/>
+            </div>
+
+            <button type="submit" value="submit">Search</button>
+        </form>
+
+
+
+        {{#each posts}}
+            <h2 id="{{title}}">{{title}}</h2>
+                <div>
+                    <p>{{description}}</p>
+                    <p>{{location}}</p>
+                    <p>{{poster.name}}</p>
+                </div>
+
+
+            <form method="POST" action="/updatePost/{{_id}}" id="updatepost_form">
+                <div>
+                    <label for="updatepost_form">Item Category:</label>
+                    <select name="updatepost_form" id="updatepost_form">
+                        <option value="Available">Available</option>
+                        <option value="Taken">Taken</option>
+                        <option value="OMW">On My Way</option>
+                    </select>
+                    <button type="submit" value="submit">Submit</button>
+                </div>
+            </form>
+
+            {{!-- <form method="POST" action="/updatePost/{{_id}}" id="updatepost_form">
+                <div>
+                    <button type="submit" id="updatepost_form" value="A">Available</button>
+                    <button type="submit" id="updatepost_form" value="T">Taken</button>
+                    <button type="submit" id="updatepost_form" value="omw">On My Way</button>
+                </div>
+            </form>
+             --}}
+        
+            <form method="POST" action="/comments/{{_id}}" id="comment_form">
+            
+                <div>
+                    <label for="comment_form">Add Comment:</label>
+                    <input type="text" name="comment_form" id="comment_form"/>
+                    <button type="submit" value="submit">Submit</button>
+                </div>
+
+            </form>
+
+            {{#each comments}}
+                    <div>
+                        <table>
+                            <tr>
+                                <th>{{commentDate}}</th>
+                                <th>{{userId}}</th>
+                                <th>{{text}}</th>
+                            </tr>
+                        </table>
+                    </div>
+            {{/each}}
+
+        {{/each}}
+
+
+
     </div>
-
-    <button type="submit" value="submit">Search</button>
-  </form>
-
-  <a href="/login">Click here to login</a>
-</div>

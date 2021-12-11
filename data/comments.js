@@ -22,22 +22,55 @@ let exportedMethods = {
 
     return comment;
   },
+
+
+
   //create interaction
   async createComment(postId, userId, text) {
-    if (!verify.validString(postId)) throw "Post id is not a valid string.";
+    //if (!verify.validString(postId)) throw "Post id is not a valid string.";
     if (!verify.validString(userId)) throw "User id is not a valid string.";
     if (!verify.validString(text)) throw "Text is not a valid string.";
 
-    let newComment = { postId: postId, userId: userId, text: text };
-    const commentCollection = await comments();
-    const insertInfo = await commentCollection.insertOne(newComment);
-    if (insertInfo.insertedCount === 0) throw "Could not add comment.";
+    let currentDate = new Date();
+    let cDay = currentDate.getDate();
+    let cMonth = currentDate.getMonth();
+    let cYear = currentDate.getFullYear();
+    const date = new Date(cYear, cMonth, cDay);
+    let newdate = date.toDateString();
 
-    const newId = insertInfo.insertedId;
-    const findComment = await this.getCommentById(newId.toString());
+    let newComment = { 
+      _id: new ObjectId(), 
+      userId: userId,
+      commentDate: newdate,
+      text: text,
+    };
 
-    return findComment;
+    const posts = mongoCollections.posts;
+    const post = require('./posts');
+    let thisPost = await post.getPostById(postId);
+    thisPost.comments.push(newComment);
+
+    delete thisPost._id;
+    let postCollection = await posts();
+    const updatedInfo = await postCollection.updateOne({_id: postId},{ $set: thisPost});
+        
+    let allPosts = await post.getPostById(postId);
+    return allPosts;
+
+
+    // const commentCollection = await comments();
+    // const insertInfo = await commentCollection.insertOne(newComment);
+    // if (insertInfo.insertedCount === 0) throw "Could not add comment.";
+
+    // const newId = insertInfo.insertedId;
+    // const findComment = await this.getCommentById(newId.toString());
+
+    // return findComment;
   },
+
+
+
+
   //remove interaction
   async deleteComment(commentId) {
     if (!verify.validString(commentId))

@@ -2,14 +2,18 @@ const mongoCollections = require("../config/mongoCollections");
 const posts = mongoCollections.posts;
 const users = require("./users");
 const uuid = require("uuid");
-const { ObjectId } = require("mongodb");
+const { ObjectId } = require('mongodb');
+//const fs = require('gridfs');
 
 let exportedMethods = {
+
+
   //GET ALL
   async getAllPosts() {
     const postCollection = await posts();
     return await postCollection.find({}).toArray();
   },
+
 
   //GET BY ID
   async getPostById(id) {
@@ -25,9 +29,10 @@ let exportedMethods = {
     let allPosts = [];
     const postCollection = await posts();
     const post = await this.getAllPosts();
+  
 
-    for (let i = 0; i < post.length; i++) {
-      if (post[i].poster.name.toLowerCase().includes(username.toLowerCase())) {
+    for (let i=0; i<post.length; i++){
+      if (post[i].poster.name.toLowerCase().includes(username.toLowerCase())){
         allPosts.push(post[i]);
       }
     }
@@ -35,17 +40,29 @@ let exportedMethods = {
     return allPosts;
   },
 
+
   //CREATE POST
   async addPost(title, description, category, image, location, username) {
     const postCollection = await posts();
+    //fs = gridfs.GridFS(postCollection);
     const userThatPosted = await users.getUserByUserName(username);
+
+    let currentDate = new Date();
+    let cDay = currentDate.getDate();
+    let cMonth = currentDate.getMonth();
+    let cYear = currentDate.getFullYear();
+    const date = new Date(cYear, cMonth, cDay);
+    let newdate = date.toDateString();
 
     let newPost = {
       title: title,
       description: description,
+      datePosted: newdate,
       category: category,
       imageFile: image,
       location: location,
+      availability: "available",
+      comments: [],
       poster: {
         id: userThatPosted._id,
         name: `${userThatPosted.username} ${userThatPosted.email}`,
@@ -59,6 +76,7 @@ let exportedMethods = {
     return this.getPostById(newInsertInformation.insertedId);
   },
 
+
   //REMOVE POST
   async removePost(id) {
     const postCollection = await posts();
@@ -68,41 +86,45 @@ let exportedMethods = {
     return true;
   },
 
+
   //UPDATE POST
-  async updatePost(id, title, body, posterId) {
+  async updatePost(availability, postId) {
     const postCollection = await posts();
-    const userThatPosted = await users.getUserById(posterId);
+    //const userThatPosted = await users.getUserById(posterId);
 
     let updatedPost = {
-      title: title,
-      body: body,
-      poster: {
-        id: posterId,
-        name: userThatPosted.name,
-      },
+      availability: availability,
+      // poster: {
+      //   id: posterId,
+      //   name: `${userThatPosted.username} ${userThatPosted.email}`,
+      // },
     };
-    const updateInfo = await postCollection.updateOne(
-      { _id: id },
-      { $set: updatedPost }
-    );
-    if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
-      throw "Update failed";
-    return this.getPostById(id);
+    const updatedInfo = await postCollection.updateOne({_id: postId},{ $set: {availability: availability}});
+        
+    let allPosts = await this.getPostById(postId);
+    return allPosts;
+
+    // const updateInfo = await postCollection.updateOne(
+    //   { availability: availability },
+    //   { $set: updatedPost }
+    // );
+    // if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+    //   throw "Update failed";
+    // return this.getPostById(id);
   },
 
-  //SEARCH POST
+
+//SEARCH POST
   async searchPost(searchTerm) {
     let searchPost = [];
-
+    
     const posts = mongoCollections.posts;
     const postCollection = await posts();
     const post = await this.getAllPosts();
+  
 
-    for (let i = 0; i < post.length; i++) {
-      if (
-        post[i].title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post[i].description.toLowerCase().includes(searchTerm.toLowerCase())
-      ) {
+    for (let i=0; i<post.length; i++){
+      if ((post[i].title.toLowerCase().includes(searchTerm.toLowerCase())) || (post[i].description.toLowerCase().includes(searchTerm.toLowerCase()))){
         searchPost.push(post[i]);
       }
     }

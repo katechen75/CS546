@@ -4,7 +4,14 @@ const session = require('express-session')
 const configRoutes = require('./routes');
 const exphbs = require('express-handlebars');
 const static = express.static(__dirname + '/public');
+//const connection = require('./config/db');
 app.use('/public', static);
+const path = require('path');
+const crypto = require('crypto');
+const settings = require('./config/settings');
+const mongoConfig = settings.mongoConfig;
+const mongoose = require('mongoose');
+const Grid = require('gridfs-stream');
 
 sess = {};
 
@@ -29,20 +36,20 @@ app.use('/private', (req, res, next) => {
 
 app.use('/login', (req, res, next) => {
     if (req.session.user) {
-      return res.redirect('/private');
+        return res.redirect('/private');
     } else {
-      next();
+        next();
     }
-  });
+});
 
-  app.use('/signup', (req, res, next) => {
+app.use('/signup', (req, res, next) => {
     if (req.session.user) {
         console.log(req.session.user)
-      return res.redirect('/private');
+        return res.redirect('/private');
     } else {
-      next();
+        next();
     }
-  });
+});
 
 app.use(async (req, res, next) => {
     let authStatus = "";
@@ -55,10 +62,20 @@ app.use(async (req, res, next) => {
 	next();
 });
 
+// let gfs;
+// const conn = mongoose.createConnection(mongoConfig.serverURL);
+
+// conn.once('open', () => {
+//     gfs = Grid(conn.db, mongoose.mongo);
+//     gfs.collection('uploads');
+// });
+
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 configRoutes(app);
+
+//connection();
 
 app.listen(3000, () => {
     console.log("We've now got a server!");

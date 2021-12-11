@@ -1,6 +1,7 @@
 {
   "mongoConfig": {
     "database": "HobokenCurbside",
-    "serverURL": "mongodb://localhost:27017"
+    "serverURL": "mongodb://localhost:27017",
+    "imageURL": "mongodb://localhost:27017/image-upload"
   }
 }
