@@ -69,36 +69,36 @@ router.post("/login", async (req, res) => {
 });
 
 //SignUp Page GET Route
-router.get("/signup", async (req, res) => {
-  try {
-    res.render("users/signupPage", { title: "Sign Up Page" });
-  } catch (e) {
-    res.sendStatus(500);
-  }
-});
+// router.get("/signup", async (req, res) => {
+//   try {
+//     res.render("users/signupPage", { title: "Sign Up Page" });
+//   } catch (e) {
+//     res.sendStatus(500);
+//   }
+// });
 
 //SignUp Page POST Route
-router.post("/signup", async (req, res) => {
-  const signupName = req.body.username;
-  const signupPW = req.body.password1;
-  const email = req.body.email;
-  const gender = req.body.gender;
-  const city = req.body.city;
-  try {
-    const signuptest = await userdata.addUser(
-      signupName,
-      signupPW,
-      email,
-      gender,
-      city
-    );
-    if (signuptest == "{userInserted:true}") {
-      res.redirect("/");
-    }
-  } catch (e) {
-    res.status(500).json({ message: "routes error" });
-  }
-});
+// router.post("/signup", async (req, res) => {
+//   const signupName = req.body.username;
+//   const signupPW = req.body.password1;
+//   const email = req.body.email;
+//   const gender = req.body.gender;
+//   const city = req.body.city;
+//   try {
+//     const signuptest = await userdata.addUser(
+//       signupName,
+//       signupPW,
+//       email,
+//       gender,
+//       city
+//     );
+//     if (signuptest == "{userInserted:true}") {
+//       res.redirect("/");
+//     }
+//   } catch (e) {
+//     res.status(500).json({ message: "routes error" });
+//   }
+// });
 
 //get /private
 router.get("/private", async (req, res) => {
