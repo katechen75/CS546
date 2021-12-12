@@ -3,7 +3,7 @@ const router = express.Router();
 const posts = require("../data/posts");
 const comments = require("../data/comments");
 const userdata = require("../data/users");
-const upload = require("../data/uploads.js");
+// const upload = require("../data/uploads.js");
 const GridFsStorage = require("multer-gridfs-storage");
 const settings = require("../config/settings");
 const mongoConfig = settings.mongoConfig;
@@ -180,6 +180,7 @@ router.post("/posting", async (req, res) => {
     let createPost = await posts.addPost(
       itemName,
       itemDescription,
+      latLong,
       itemCategory,
       itemImageURL,
       itemLocation,
@@ -382,10 +383,10 @@ router.get("/posting", async (req, res) => {
   }
 });
 
-router.post("/upload", upload.single("file"), async (req, res) => {
-  // res.json({ file: req.file });
-  res.redirect("/login");
-});
+// router.post("/upload", upload.single("file"), async (req, res) => {
+//   // res.json({ file: req.file });
+//   res.redirect("/login");
+// });
 
 router.get("/files", async (req, res) => {
   if (req.session.cookie) {
