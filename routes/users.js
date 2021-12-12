@@ -7,23 +7,24 @@ const userdata = require("../data/users");
 const GridFsStorage = require("multer-gridfs-storage");
 const settings = require("../config/settings");
 const mongoConfig = settings.mongoConfig;
-const app = require("../app.js");
+const app = require("../app");
 const mongooseCollections = require("../config/mongooseCollection");
 const { users } = require("../config/mongoCollections");
 const uploads = mongooseCollections.uploads;
 
 //Home Page Route
 router.get("/", async (req, res) => {
-  try {
+if (req.session.user) {
+    const allPosts = await posts.getAllPosts();
+    res.render("users/homePage", { posts: allPosts });
+  } else {
     res.render("users/loginPage");
-  } catch (e) {
-    res.status(404);
   }
 });
 
 //LogIn Page Route
 router.get("/login", async (req, res) => {
-  if (sess) {
+  if (req.session.user) {
     const allPosts = await posts.getAllPosts();
     res.render("users/homePage", { posts: allPosts });
   } else {
@@ -56,14 +57,14 @@ router.post("/login", async (req, res) => {
     const logintest = await userdata.checkUser(loginName, loginPW);
     if (logintest == "{authenticated: true}") {
       req.session.user = { username: loginName };
-      sess = req.session.user;
-      res.cookie("AuthCookie", req.session, false, true);
-      res.redirect("/login");
+    //  sess = req.session.user;
+    //  res.cookie("AuthCookie", req.session, false, true);
+      res.redirect("/private");
     } else {
-      res.render("users/loginpage", { title: "Login Page" });
+      res.render("users/loginpage", { title: "Login Page",hasErrors:true });
     }
   } catch (e) {
-    res.render("users/loginpage", { title: "Login Page" });
+    res.render("users/loginpage", { title: "Login Page" ,hasErrors:true });
   }
 });
 
@@ -83,8 +84,6 @@ router.post("/signup", async (req, res) => {
   const email = req.body.email;
   const gender = req.body.gender;
   const city = req.body.city;
-  const NYcities = [];
-  const NJcities = [];
   try {
     const signuptest = await userdata.addUser(
       signupName,
@@ -103,7 +102,7 @@ router.post("/signup", async (req, res) => {
 
 //get /private
 router.get("/private", async (req, res) => {
-  if (sess) {
+  //if (req.session.user) {
     try {
       let userName = req.session.user.username;
       const userPosts = await posts.getPostByPosterName(userName);
@@ -114,7 +113,7 @@ router.get("/private", async (req, res) => {
           .render("users/userPage", { error: "User has made no posts" });
         return;
       }
-      const userActivity = await userdata.getUserByUserName(sess.username);
+      const userActivity = await userdata.getUserByUserName(userName);
       if (!userActivity) {
         res
           .status(500)
@@ -126,8 +125,8 @@ router.get("/private", async (req, res) => {
         userPost: userPosts,
         userActivity: userActivity,
       });
-    } catch (e) {}
-  }
+    } catch (e) {res.sendStatus(502);}
+ // }
 });
 
 //get /onePost
