@@ -1,55 +1,69 @@
 <h1>Make A Post!</h1>
-    <div>
-        
-        {{!-- {{#if error}}
+<div>
+
+  {{!-- {{#if error}}
             <div id="error">
                 <p>{{ error }}</p>
             </div>
         {{/if}} --}}
 
-        <form method="POST" action="/posting" id="posting-form">
+  <form method="POST" action="/posting" id="posting-form">
 
-            <div>
-                <label for="title">Item Name:</label>
-                <input type="text" name="title" id="title"/>
-            </div>
-
-            <div>
-                <label for="description">Item Description:</label>
-                <input type="text" name="description" id="description"/>
-            </div>
-
-            <div>
-                <label for="item_category">Item Category:</label>
-                <select name="item_category" id="item_category">
-                    {{!-- <optgroup label="furniture"> --}}
-                        <option value="furniture">furniture</option>
-                        <option value="household">household</option>
-                    {{!-- </optgroup> --}}
-                </select>
-                {{!-- <input type="button" name="item_category" id="item_category" value="Furniture" onclick="clickedF()"/>
-                <input type="button" name="item_category" id="item_category" value="House Hold" onclick="clickedF()"/> --}}
-            </div>
-
-            <div>
-                <label for="item_image">Item Image:</label>
-                <input type="file" name="item_image" id="item_image"/>
-            </div>
-
-            <div>
-                <label for="item_location">Item Location:</label>
-                <input type="text" name="item_location" id="item_location"/>
-            </div>
-            
-            <button type="submit" value="submit">Post</button>
-        </form>
-
-        <a href="/private">Go back to user page.</a>
-
-        <p>{{files}}</p>
+    <div>
+      <label for="title">Item Name:</label>
+      <input type="text" name="title" id="title" />
     </div>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+    <div>
+      <label for="description">Item Description:</label>
+      <input type="text" name="description" id="description" />
+    </div>
+
+    <div>
+      <label for="item_category">Item Category:</label>
+      <select name="item_category" id="item_category">
+        {{! <optgroup label="furniture"> }}
+        <option value="furniture">furniture</option>
+        <option value="household">household</option>
+        {{! </optgroup> }}
+      </select>
+      {{! <input type="button" name="item_category" id="item_category" value="Furniture" onclick="clickedF()"/>
+                <input type="button" name="item_category" id="item_category" value="House Hold" onclick="clickedF()"/> }}
+    </div>
+
+    <div>
+      <label for="item_image">Item Image:</label>
+      <input type="file" name="item_image" id="item_image" />
+      {{!-- User has to upload image and we code it in here --}}
+    </div>
+
+    <div>
+      <label for="item_location">Item Location:</label>
+      <input type="text" name="item_location" id="item_location" />
+      <iframe
+        src="https://maps.google.com/maps?q={{itemLocation}}&z=15&output=embed"
+        width="360"
+        height="270"
+        style="border:0"
+      ></iframe>
+
+    </div>
+
+    <button type="submit" value="submit">Post</button>
+  </form>
+
+  <a href="/private">Go back to user page.</a>
+
+  <p>{{files}}</p>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+  integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+  crossorigin="anonymous"
+></script>

@@ -138,10 +138,10 @@ router.get("/logout", (req, res) => {
   res.render("users/logoutPage");
 });
 
-let currentLoc = zipcodes.lookup(item.currentLocation);
+let currentLoc = zipcodes.lookup(posts.currentLocation);
 let cityState = currentLoc.city + ", " + currentLoc.state;
-let loc = currentLoc.latitude + "," + currentLoc.longitude;
-item.currentLocation = cityState;
+let itemLocation = currentLoc.latitude + "," + currentLoc.longitude;
+posts.currentLocation = cityState;
 
 //SignUp Page POST Route
 router.post("/posting", async (req, res) => {
@@ -149,7 +149,7 @@ router.post("/posting", async (req, res) => {
   let itemDescription = req.body.description;
   let itemCategory = req.body.item_category;
   let itemImageURL = req.body.item_image;
-  let itemLocation = req.body.item_location;
+  itemLocation = req.body.item_location;
 
   if (!itemName || !itemDescription || !itemCategory || !itemLocation) {
     res.status(400).render("users/homePage", { error: "Missing Value" });
@@ -183,7 +183,7 @@ router.post("/posting", async (req, res) => {
         .render("users/homePage", { error: "Could not create post" });
       return;
     } else {
-      res.redirect("/login");
+      res.redirect("/");
       return;
     }
   } catch (e) {
