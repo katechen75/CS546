@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
             }
     }
     catch (e) {
-        res.render('users/loginpage', { title: "Login Page", hasErrors: true });
+        res.render('users/loginpage', { title: "Login Page" });
     }
 });
 
@@ -103,7 +103,6 @@ router.get("/private", async (req, res) => {
                 res.status(500).render('users/userPage', {error: 'User has made no posts'});
                 return;
             }
-
             const userActivity = await userdata.getUserByUserName(sess.username);
             if (!userActivity){
                 res.status(500).render('users/userPage', {error: 'User has made no posts'});
@@ -226,7 +225,11 @@ router.post("/updatePost/:id", async (req, res) => {
             return;
         }
 
-        let updateUser = await userdata.updateUser(sess.username, req.params.id);
+        const getUser = await userdata.getUserByUserName(sess.username);
+        const userId = getUser._id;
+        //const userActivity = await userdata.updateUser(userId);
+
+        let updateUser = await userdata.updateUser(userId, req.params.id);
 
         if (!updateUser){
             res.status(500).render('users/homePage', {error: 'Unable to update post.'});

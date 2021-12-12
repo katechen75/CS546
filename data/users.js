@@ -92,8 +92,8 @@ let exportedMethods = {
     const post2 = require('./posts');
     //const postCollection = await posts();
     const posts = await post2.getPostById(postId);
-    const thisUser = await this.getUserByUserName(userId);
-    const thisUser2 = await this.getUserByUserName(userId);
+    const thisUser = await this.getUserById(userId);
+    //const thisUser2 = await this.getUserByUserName(userId);
 
 
     const userUpdateInfo = {
@@ -105,13 +105,13 @@ let exportedMethods = {
 
     const userCollection = await users();
     const updateInfo = await userCollection.updateOne(
-      { username: userId },
-      { $set: {taken: post} }
+      { _id: userId },
+      { $set: {taken: posts} }
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
       throw "Update failed";
 
-    return await this.getUserByUserName(userId);
+    return await this.getUserByUserId(userId);
   },
 };
 
