@@ -179,11 +179,10 @@ router.post("/posting", async (req, res) => {
     let createPost = await posts.addPost(
       itemName,
       itemDescription,
-      latLong,
       itemCategory,
       itemImageURL,
       itemLocation,
-      sess.username
+      req.session.user.username
     );
 
     if (!createPost) {
@@ -198,7 +197,7 @@ router.post("/posting", async (req, res) => {
   } catch (e) {
     res
       .status(400)
-      .render("users/homePage", { error: "Could not create post" });
+      //.render("users/homePage", { error: "Could not create post" });
     return;
   }
 });
