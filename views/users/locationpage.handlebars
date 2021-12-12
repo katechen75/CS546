@@ -23,24 +23,6 @@
     <div id="map">
     </div>
 
-    <!-- SCRIPTS -->
-    {{!-- <script>
-      function initMap() { var options = { //Creates map options to add to the
-      default map. zoom:8, center:{lat:29.9511,lng:-90.0715} } var map = new
-      google.maps.Map(document.getElementById('map'), options); //Creates the
-      map and includes the options. //Listen for click on map
-      google.maps.event.addListener(map, 'click', function(event){
-      addMarker({coordinates:event.latLng}); //Add marker }); //Array of markers
-      addMarker(markers[i]); //Add markers } //Add Marker function function
-      addMarker(props) { var marker = new google.maps.Marker({
-      position:props.coordinates, map:map, //icon:props.iconImage });
-      if(props.iconImage) { //Check for custom icon
-      marker.setIcon(props.iconImage); //Set icon image } if(props.content) {
-      //Check content var infoWindow = new google.maps.InfoWindow({
-      content:props.content }); marker.addListener('click', function() {
-      infoWindow.open(map,marker); }); } } }
-    </script> --}}
-
     <script
       async
       defer
