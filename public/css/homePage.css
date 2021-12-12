@@ -2,8 +2,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: url("https://img.zcool.cn/community/01193959eeec64a801202b0c23804b.jpg@1280w_1l_2o_100sh.jpg")
-      no-repeat center 0px;
+    background: rgb(182, 182, 245);
+    background: linear-gradient(180deg, rgb(181, 181, 224) 0%, rgba(244, 248, 249, 1) 100%);
     background-size: cover;
     background-position: center 0;
     background-repeat: no-repeat;
@@ -14,11 +14,14 @@ body {
     -ms-background-size: cover;
   }
   .search-box {
+    color: #fff;
+    margin: auto;
+    display: block;
     position: relative;
-    opacity:0.8; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 70%);
+    margin-top: 100px;
+    margin-bottom: 50px;
+    opacity:0.85; 
+   /*transform: translate(-50%, 70%);*/
     width: 800px;
     padding: 12px;
     background: rgba(68, 65, 65, 0.8);
@@ -39,13 +42,19 @@ body {
     font-size:20px
   }
 
+  th{
+    color: #fff;   
+  }
   .posts-box {
+    color: #fff;
+    margin: auto;
+    display: block;
     position: relative;
-    opacity:0.7; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 22%);
-    width: 600px;
+    opacity:0.85; 
+    top: 10%;
+    /*left: 50%;
+    /*transform: translate(-50%, 10%);*/
+    width: 800px;
     padding: 12px;
     background: rgba(68, 65, 65, 0.8);
     box-sizing: border-box;
