@@ -25,18 +25,10 @@ app.use(
         saveUninitialized: true,
 }));
 
-app.use('/private', (req, res, next) => {
-    req.session.user = sess;
-    if (!req.session.user) {
-        res.status(403).render('users/error', {error: "403 Error: You are not logged-in"});
-    } else {
-        next();
-    }
-});
-
 app.use('/login', (req, res, next) => {
     if (req.session.user) {
-        return res.redirect('/private');
+       // return res.redirect('users/homePage');
+       return res.render('users/homePage');
     } else {
         next();
     }
@@ -51,6 +43,15 @@ app.use('/signup', (req, res, next) => {
     }
 });
 
+app.use('/private', (req, res, next) => {
+    //req.session.user = sess;
+    if (!req.session.user) {
+        return res.status(403).render('users/loginPage', {error: "403 Error: You are not logged-in"});
+    } else {
+        next();
+    }
+});
+
 app.use(async (req, res, next) => {
     let authStatus = "";
     if (req.session.user) {
@@ -59,6 +60,7 @@ app.use(async (req, res, next) => {
         authStatus = "Non-Authenticated User";
     }
     console.log('['+ new Date().toUTCString() + ']: ' + req.method + ' ' + req.originalUrl + ' (' + authStatus + ')');
+    console.log(req.session.user)
 	next();
 });
 
