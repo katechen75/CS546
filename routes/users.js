@@ -14,7 +14,7 @@ const uploads = mongooseCollections.uploads;
 
 //Home Page Route
 router.get("/", async (req, res) => {
-if (req.session.user) {
+  if (req.session.user) {
     const allPosts = await posts.getAllPosts();
     res.render("users/homePage", { posts: allPosts });
   } else {
@@ -57,14 +57,14 @@ router.post("/login", async (req, res) => {
     const logintest = await userdata.checkUser(loginName, loginPW);
     if (logintest == "{authenticated: true}") {
       req.session.user = { username: loginName };
-    //  sess = req.session.user;
-    //  res.cookie("AuthCookie", req.session, false, true);
+      //  sess = req.session.user;
+      //  res.cookie("AuthCookie", req.session, false, true);
       res.redirect("/private");
     } else {
-      res.render("users/loginpage", { title: "Login Page",hasErrors:true });
+      res.render("users/loginpage", { title: "Login Page", hasErrors: true });
     }
   } catch (e) {
-    res.render("users/loginpage", { title: "Login Page" ,hasErrors:true });
+    res.render("users/loginpage", { title: "Login Page", hasErrors: true });
   }
 });
 
@@ -103,36 +103,44 @@ router.post("/signup", async (req, res) => {
 //get /private
 router.get("/private", async (req, res) => {
   //if (req.session.user) {
-    try {
-      let userName = req.session.user.username;
-      const userPosts = await posts.getPostByPosterName(userName);
+  try {
+    let userName = req.session.user.username;
+    const userPosts = await posts.getPostByPosterName(userName);
 
-      if (!userPosts) {
-        res
-          .status(500)
-          .render("users/userPage", { error: "User has made no posts" });
-        return;
-      }
-      const userActivity = await userdata.getUserByUserName(userName);
-      if (!userActivity) {
-        res
-          .status(500)
-          .render("users/userPage", { error: "User has made no posts" });
-        return;
-      }
-      res.render("users/userPage", {
-        user: req.session.user,
-        userPost: userPosts,
-        userActivity: userActivity,
-      });
-    } catch (e) {res.sendStatus(502);}
- // }
+    if (!userPosts) {
+      res
+        .status(500)
+        .render("users/userPage", { error: "User has made no posts" });
+      return;
+    }
+    const userActivity = await userdata.getUserByUserName(userName);
+    if (!userActivity) {
+      res
+        .status(500)
+        .render("users/userPage", { error: "User has made no posts" });
+      return;
+    }
+    res.render("users/userPage", {
+      user: req.session.user,
+      userPost: userPosts,
+      userActivity: userActivity,
+    });
+  } catch (e) {
+    res.sendStatus(502);
+  }
+  // }
 });
 
 //get /onePost
 router.get("/onePost", async (req, res) => {
   if (sess) {
-    res.render("users/listingPage");
+    res.render(200).render({
+      itemName: itemName,
+      itemDescription: itemDescription,
+      itemCategory: itemCategory,
+      itemImageURL: itemImageURL,
+      latLong: latLong,
+    });
   } else {
     res.render("users/listingPage");
   }
@@ -146,9 +154,9 @@ router.get("/logout", (req, res) => {
   res.render("users/logoutPage");
 });
 
-// let currentLoc = zipcodes.lookup(posts.itemLocation);
-// let cityState = currentLoc.city + ", " + currentLoc.state;
-// let latLong = currentLoc.latitude + "," + currentLoc.longitude;
+// let currentLocation = zipcodes.lookup(posts.itemLocation);
+// let cityState = currentLocation.city + ", " + currentLocation.state;
+// let latLong = currentLocation.latitude + "," + currentLocation.longitude;
 // posts.currentLocation = cityState;
 
 //SignUp Page POST Route
@@ -195,9 +203,8 @@ router.post("/posting", async (req, res) => {
       return;
     }
   } catch (e) {
-    res
-      .status(400)
-      //.render("users/homePage", { error: "Could not create post" });
+    res.status(400);
+    //.render("users/homePage", { error: "Could not create post" });
     return;
   }
 });
