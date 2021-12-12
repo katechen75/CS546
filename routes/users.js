@@ -11,6 +11,7 @@ const app = require("../app.js");
 const mongooseCollections = require("../config/mongooseCollection");
 const { users } = require("../config/mongoCollections");
 const uploads = mongooseCollections.uploads;
+const zipcodes = require("zipcodes");
 
 //Home Page Route
 router.get("/", async (req, res) => {
@@ -137,10 +138,10 @@ router.get("/logout", (req, res) => {
   res.render("users/logoutPage");
 });
 
-// let currentLoc = zipcodes.lookup(item.currentLocation);
-// let cityState = currentLoc.city + ", " + currentLoc.state;
-// let latLong = currentLoc.latitude + "," + currentLoc.longitude;
-// item.currentLocation = cityState;
+let currentLoc = zipcodes.lookup(item.currentLocation);
+let cityState = currentLoc.city + ", " + currentLoc.state;
+let loc = currentLoc.latitude + "," + currentLoc.longitude;
+item.currentLocation = cityState;
 
 //SignUp Page POST Route
 router.post("/posting", async (req, res) => {
