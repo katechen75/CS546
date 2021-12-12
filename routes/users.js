@@ -137,6 +137,11 @@ router.get("/logout", (req, res) => {
   res.render("users/logoutPage");
 });
 
+// let currentLoc = zipcodes.lookup(item.currentLocation);
+// let cityState = currentLoc.city + ", " + currentLoc.state;
+// let latLong = currentLoc.latitude + "," + currentLoc.longitude;
+// item.currentLocation = cityState;
+
 //SignUp Page POST Route
 router.post("/posting", async (req, res) => {
   let itemName = req.body.title;
