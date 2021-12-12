@@ -1,11 +1,11 @@
-<h1>Hoboken Curbside</h1>
+<link rel="stylesheet" href="/public/css/homePage.css"/>
     <div>
-        <a href="/private">Click to View User Page</a>
-        <p>A place for furniture & household items that have no home.</p>
+        
+        <p class='intro'>A place for furniture & household items that have no home.</p>
 
-
+      <div class='search-box'>
         <form method="POST" action="/sortPosts" id="sortPost">
-            <div>
+            <div class='sort'>
                 <label for="sortPost">Sort Posts By:</label>
                 <select name="sortPost" id="sortPost">
                     <optgroup label= Availability>
@@ -26,10 +26,9 @@
             </div>
         </form>
 
-
         <form method="POST" action="/search" id="search-form">
         
-            <div>
+            <div class='search'>
                 <label for="search_item">Search Item:</label>
                 <input type="text" name="search_item" id="search_item"/>
             </div>
@@ -37,13 +36,14 @@
             <button type="submit" value="submit">Search</button>
         </form>
 
-
         {{#if error}}
             <div>
                 <p>{{error}}</p>
             </div>
         {{/if}}
+      </div>
 
+      <div class='posts-box'>
         {{#each posts}}
             <h2 id="{{title}}">{{title}}</h2>
                 <div>
@@ -53,9 +53,8 @@
                     <p>{{availability}}</p>
                 </div>
 
-
             <form method="POST" action="/updatePost/{{_id}}" id="updatepost_form">
-                <div>
+                <div class='update'>
                     <label for="updatepost_form">Change Item Availability:</label>
                     <select name="updatepost_form" id="updatepost_form">
                         <option value="Available">Available</option>
@@ -66,10 +65,9 @@
                 </div>
             </form>
 
-        
             <form method="POST" action="/comments/{{_id}}" id="comment_form">
             
-                <div>
+                <div class='comment'>
                     <label for="comment_form">Add Comment:</label>
                     <input type="text" name="comment_form" id="comment_form"/>
                     <button type="submit" value="submit">Submit</button>
@@ -90,6 +88,8 @@
             {{/each}}
 
         {{/each}}
-
-        <script src="../../public/js/hbh.js"></script>
     </div>
+        <script src="/public/js/hbh.js"></script>
+    </div>
+
+    <a href="/private">Click to View User Page</a>
