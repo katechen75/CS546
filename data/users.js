@@ -37,10 +37,9 @@ let exportedMethods = {
 
       if(userList.length >=1){
         for(let i=0;i<userList.length;i++){
-        if(userList[i].username.toLowerCase()==casetestName) throw 'User name exists!'
+          if(userList[i].username.toLowerCase()==casetestName) throw 'User name exists!'
         }
       }
-
       let newUser = {
         username: username,
         password: hashPassword,
@@ -55,7 +54,7 @@ let exportedMethods = {
       const newInsertInformation = await userCollection.insertOne(newUser);
       if (newInsertInformation.insertedCount === 0) throw 'Insert failed!';
       return '{userInserted:true}';
-    },
+  },
     
     async checkUser(username, password) {
       if(!username) throw 'You must input a username!'
@@ -64,7 +63,7 @@ let exportedMethods = {
       if(username.substring(0,2)=='  ') throw 'password can not be spaces!'
       if(!password) throw 'You must input a password!'
       if(typeof(password)!=='string') throw 'invalid password!'
-      if(password.length<6) throw 'password should be at least 6 characters long'
+      //if(password.length<6) throw 'password should be at least 6 characters long'
       for(let i=0;i<password.length;i++){
         if(password[i]==' ') throw 'password input can not be spaces!'
       }            
