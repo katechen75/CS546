@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
             }
     }
     catch (e) {
-        res.render('users/loginpage', { title: "Login Page" });
+        res.render('users/loginpage', { title: "Login Page", hasErrors: true });
     }
 });
 
