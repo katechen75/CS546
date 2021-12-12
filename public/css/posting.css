@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: rgb(182, 182, 245);
+    background: linear-gradient(180deg, rgb(181, 181, 224) 0%, rgba(244, 248, 249, 1) 100%);
+    background-size: cover;
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+  }
+  .post-box {
+    color: #fff;
+    margin: auto;
+    display: block;
+    position: relative;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    opacity:0.85; 
+   /*transform: translate(-50%, 70%);*/
+    width: 800px;
+    padding: 12px;
+    background: rgba(68, 65, 65, 0.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(139, 136, 136, 0.5);
+    border-radius: 10px;
+  }
+  .post-box p {
+    color: #fff;
+    font-size: 10px;
+  }
+  .post-box h1{
+      color:#fff;
+      margin:auto
+  }
