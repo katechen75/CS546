@@ -1,7 +1,10 @@
 const mongoCollections = require("../config/mongoCollections");
+const post = require("./posts");
 const users = mongoCollections.users;
+const posts = mongoCollections.posts;
 const uuid = require("uuid");
 const bcrypt = require('bcrypt');
+//const post = require("./posts");
 const saltRounds = 15;
 
 let exportedMethods = {
@@ -83,24 +86,32 @@ let exportedMethods = {
     }
     return true;
   },
-  async updateUser(id, firstName, lastName) {
-    const user = await this.getUserById(id);
-    console.log(user);
+  async updateUser(userId, postId) {
+    //const user = await this.getUserById(userId);
+    const post = mongoCollections.posts;
+    const post2 = require('./posts');
+    //const postCollection = await posts();
+    const posts = await post2.getPostById(postId);
+    const thisUser = await this.getUserByUserName(userId);
+    const thisUser2 = await this.getUserByUserName(userId);
+
 
     const userUpdateInfo = {
-      firstName: firstName,
-      lastName: lastName,
+      taken: posts
     };
+
+    thisUser.taken.push(userUpdateInfo);
+    delete thisUser._id;
 
     const userCollection = await users();
     const updateInfo = await userCollection.updateOne(
-      { _id: id },
-      { $set: userUpdateInfo }
+      { username: userId },
+      { $set: {taken: post} }
     );
     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
       throw "Update failed";
 
-    return await this.getUserById(id);
+    return await this.getUserByUserName(userId);
   },
 };
 

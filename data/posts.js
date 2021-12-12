@@ -131,6 +131,46 @@ let exportedMethods = {
 
     return searchPost;
   },
+
+  //SORT POST
+  async sortPost(availability) {
+    let sortPost = [];
+    
+    const posts = mongoCollections.posts;
+    const postCollection = await posts();
+    const post = await this.getAllPosts();
+
+    if ((availability.toLowerCase() == 'taken') || (availability.toLowerCase() == 'available')){
+      for (let i=0; i<post.length; i++){
+        if (post[i].availability.toLowerCase() == availability.toLowerCase()){
+          sortPost.push(post[i]);
+        }
+      }
+    }
+    if (post.length > 1){
+      if ((availability.toLowerCase() == 'newest') || (availability.toLowerCase() == 'oldest')){
+        if (availability.toLowerCase() == 'newest'){
+          sortPost.sort((a, b) => (a.dateposted > b.dateposted) ? 1 : -1);
+        } else {
+          sortPost.sort((a, b) => (a.dateposted < b.dateposted) ? 1 : -1);
+        }
+      }
+    }
+
+    if ((availability.toLowerCase() == 'furniture') || (availability.toLowerCase() == 'household')){
+      for (let i=0; i<post.length; i++){
+        if (post[i].category.toLowerCase() == availability.toLowerCase()){
+          sortPost.push(post[i]);
+        }
+      }
+    }
+
+    if ((sortPost.length > 1) && (availability !== 'oldest')){
+      sortPost.sort((a, b) => (a.dateposted > b.dateposted) ? 1 : -1)
+    }
+
+    return sortPost;
+  },
 };
 
 module.exports = exportedMethods;

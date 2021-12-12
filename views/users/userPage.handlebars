@@ -1,19 +1,29 @@
 <h1>User Info</h1>
 <p>{{user.username}}</p>
-<p>Posts Made By the User:</p>
-{{#if userPost}}
-    <table>
+<h2>Posts Made By the User:</h2>
+    {{#if userPost}}
+
         {{#each userPost}}
-            <tr>
-                <th>
-                    <a href="/onePost">
-                    <img src={{imageFile}}>
-                    </a>
-                </th>
-            </tr>
-            {{/each}}
-        </table>
-        {{/if}}
-<a href="/">Back to Home Page</a>
+            <h2 id="{{title}}">{{title}}</h2>
+                <div>
+                    <p>{{description}}</p>
+                    <p>{{location}}</p>
+                </div>
+        {{/each}}
+
+    {{/if}}
+
+    {{#if userActivity}}
+
+        {{#each userActivity}}
+            <h2 id="{{title}}">{{title}}</h2>
+                <div>
+                    <p>{{description}}</p>
+                    <p>{{location}}</p>
+                </div>
+        {{/each}}
+
+    {{/if}}
+<a href="/login">Back to Home Page</a>
 <a href="/logout">Logout</a>
 <a href="/posting">Click here to make a post</a>

@@ -1,29 +1,30 @@
 <h1>Hoboken Curbside</h1>
     <div>
-        <a href="/login">Click here to login</a>
+        <a href="/private">Click to View User Page</a>
         <p>A place for furniture & household items that have no home.</p>
 
-        {{#if posts}}
-            <table>
-                <tr>
-                    <th>Item</th>
-                    <th>Item Description</th>
-                    <th>Item Location</th>
-                    <th>Poster</th>
-                    <th>Link to Post</th>
-                </tr>
-                {{#each posts}}
-                <tr>
-                    <th>{{title}}</th>
-                    <th>{{description}}</th>
-                    <th>{{location}}</th>
-                    <th>{{poster.name}}</th>
-                    <th><a href="#{{title}}">Click to View Post</a></th>
-                </tr>
-                {{/each}}
-            </table>
 
-        {{/if}}
+        <form method="POST" action="/sortPosts" id="sortPost">
+            <div>
+                <label for="sortPost">Sort Posts By:</label>
+                <select name="sortPost" id="sortPost">
+                    <optgroup label= Availability>
+                        <option value="Available">Available</option>
+                        <option value="Taken">Taken</option>
+                    </optgroup>
+                    <optgroup label= Date Posted>
+                        <option value="Newest">Newest</option>
+                        <option value="Oldest">Oldest</option>
+                    </optgroup>
+                    <optgroup label= Date Posted>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Household">Household</option>
+                    </optgroup>
+                        <option value="Show All">Show All</option>
+                </select>
+                <button type="submit" value="submit" onclick="myFunction()">Submit</button>
+            </div>
+        </form>
 
 
         <form method="POST" action="/search" id="search-form">
@@ -37,6 +38,11 @@
         </form>
 
 
+        {{#if error}}
+            <div>
+                <p>{{error}}</p>
+            </div>
+        {{/if}}
 
         {{#each posts}}
             <h2 id="{{title}}">{{title}}</h2>
@@ -44,12 +50,13 @@
                     <p>{{description}}</p>
                     <p>{{location}}</p>
                     <p>{{poster.name}}</p>
+                    <p>{{availability}}</p>
                 </div>
 
 
             <form method="POST" action="/updatePost/{{_id}}" id="updatepost_form">
                 <div>
-                    <label for="updatepost_form">Item Category:</label>
+                    <label for="updatepost_form">Change Item Availability:</label>
                     <select name="updatepost_form" id="updatepost_form">
                         <option value="Available">Available</option>
                         <option value="Taken">Taken</option>
@@ -59,14 +66,6 @@
                 </div>
             </form>
 
-            {{!-- <form method="POST" action="/updatePost/{{_id}}" id="updatepost_form">
-                <div>
-                    <button type="submit" id="updatepost_form" value="A">Available</button>
-                    <button type="submit" id="updatepost_form" value="T">Taken</button>
-                    <button type="submit" id="updatepost_form" value="omw">On My Way</button>
-                </div>
-            </form>
-             --}}
         
             <form method="POST" action="/comments/{{_id}}" id="comment_form">
             
@@ -92,6 +91,5 @@
 
         {{/each}}
 
-
-
+        <script src="../../public/js/hbh.js"></script>
     </div>
