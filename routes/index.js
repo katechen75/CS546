@@ -1,9 +1,6 @@
 const userRoutes = require("./users");
 const signupRoutes = require("./signup");
 const commentsRoutes = require("./comments");
-// const postsRoutes = require('./posts');
-//const mapRoutes = require('./map');
-//const path = require('path');
 
 const constructorMethod = (app) => {
   app.use("/", userRoutes);
