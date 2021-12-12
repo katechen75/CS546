@@ -128,7 +128,7 @@
     if (!emailStr.match(myreg)) {
       submit_check = false;
       emailAlert.show();
-      emailAlert.html("Please enter email");
+      emailAlert.text("Please enter a valid email");
       return;
     } else {
       emailAlert.hide();
@@ -143,14 +143,14 @@
       emailAlert.hide();
     }
 
-    if (myreg.test(emailStr)) {
-      submit_check = false;
-      emailAlert.show();
-      emailAlert.text("invalid email!");
-      return;
-    } else {
-      emailAlert.hide();
-    }
+    // if (myreg.test(emailStr)) {
+    //   submit_check = false;
+    //   emailAlert.show();
+    //   emailAlert.text("invalid email!");
+    //   return;
+    // } else {
+    //   emailAlert.hide();
+    // }
   });
 
   cityInput.blur(function (event) {
