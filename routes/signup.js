@@ -15,19 +15,23 @@ router.post('/', async (req, res) => {
         const signupName = req.body.username;
         const signupPW = req.body.password;
         const email = req.body.email;
-        const gender = req.body.genderSelect;
         const city = req.body.city;
-        const NYcities = [];
-        const NJcities = [];
-  try {     
-     // res.status(400).render('pages/signup',{ title: "Sign Up Page" , hasErrors: true,errors:errors})   
+        let gender ='Unknown'
+        if(!req.body.genderSelect){
+           gender = 'Unknown'
+        }
+        else{
+           gender = req.body.genderSelect;
+        }
+       
+  try {        
       const signuptest = await userdata.addUser(signupName,signupPW,email,gender,city)
           if(signuptest=='{userInserted:true}'){
           res.redirect('/');
          }
         }
     catch(e) {
-        res.status(500).json({ message: 'routes error' });
+      res.render('pages/signup',{ title: "Sign Up Page" , hasErrors: true}) 
     }
       });
 
