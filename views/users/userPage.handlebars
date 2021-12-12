@@ -1,6 +1,11 @@
+<a href="/">Back to Home Page</a>
+<a href="/logout">Logout</a>
+<a href="/posting">Click here to make a post</a>
+
+<link rel="stylesheet" href="/public/css/userPage.css"/>
+<div class="User-box">
 <h1>User Info</h1>
 <p>{{user.username}}</p>
-<p>{{userActivity.email}}</p>
 <h2>Posts Made By the User:</h2>
     {{#if userPost}}
 
@@ -15,7 +20,7 @@
     {{/if}}
 
     {{#if userActivity}}
-    <h2>Posts the User Has Taken</h2>
+
         {{#each userActivity}}
             <h2 id="{{title}}">{{title}}</h2>
                 <div>
@@ -25,6 +30,4 @@
         {{/each}}
 
     {{/if}}
-<a href="/login">Back to Home Page</a>
-<a href="/logout">Logout</a>
-<a href="/posting">Click here to make a post</a>
+</div>
