@@ -30,7 +30,7 @@
 
     if (!userNameStr.match(/^[a-z0-9]+$/i)) {
       submit_check = false;
-      formAlert.text("Only alphanumeric values allowed for username");
+      formAlert.text("Only alphanueric values allowed for username");
       formAlert.removeClass("hidden");
       usernameInput.focus();
       return;
