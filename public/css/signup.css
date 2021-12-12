@@ -2,8 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url("https://img.zcool.cn/community/01193959eeec64a801202b0c23804b.jpg@1280w_1l_2o_100sh.jpg")
-    no-repeat center 0px;
+  background: rgb(182, 182, 245);
+  background: linear-gradient(180deg, rgb(181, 181, 224) 0%, rgba(244, 248, 249, 1) 100%);
   background-size: cover;
   background-position: center 0;
   background-repeat: no-repeat;
