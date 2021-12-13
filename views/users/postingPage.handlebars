@@ -32,10 +32,10 @@
                 <input type="button" name="item_category" id="item_category" value="House Hold" onclick="clickedF()"/> }}
     </div>
 
-    <div class="image">
+    {{!-- <div class="image">
       <label for="item_image">Item Image:</label>
       <input type="file" name="item_image" id="item_image" />
-    </div>
+    </div> --}}
 
     <div class="location">
       <label for="item_location">Item Location:</label>
@@ -44,7 +44,17 @@
     </div>
 
     <button type="submit" value="submit">Post</button>
+  
   </form>
+           <div class="myprofile-innercard">
+              {{#if photo}}
+                <img src={{photo}} alt="Profile photo" class ="img-upload" width="100" height="100">
+              {{/if}}
+            <form method="POST" class="profile-input"  action="/photo/upload" enctype="multipart/form-data">
+              <label for="image" class="image">upload image:</label>
+              <input type="file" name="image" id="image">
+           </form>
+           </div>
 
   <p>{{files}}</p>
 </div>
