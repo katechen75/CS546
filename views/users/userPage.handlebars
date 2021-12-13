@@ -2,32 +2,32 @@
 <a href="/logout">Logout</a>
 <a href="/posting">Click here to make a post</a>
 
-<link rel="stylesheet" href="/public/css/userPage.css"/>
+<link rel="stylesheet" href="/public/css/userPage.css" />
 <div class="User-box">
-<h1>User Info</h1>
-<p>{{user.username}}</p>
-<h2>Posts Made By the User:</h2>
-    {{#if userPost}}
+  <h1>User Info</h1>
+  <p>{{user.username}}</p>
+  <h2>Posts Made By the User:</h2>
+  {{#if userPost}}
 
-        {{#each userPost}}
-            <h2 id="{{title}}">{{title}}</h2>
-                <div>
-                    <p>{{description}}</p>
-                    <p>{{location}}</p>
-                </div>
-        {{/each}}
+    {{#each userPost}}
+      <h2 id="{{title}}">{{title}}</h2>
+      <div>
+        <p>{{description}}</p>
+        <p>{{location}}</p>
+      </div>
+    {{/each}}
 
-    {{/if}}
+  {{/if}}
 
-    {{#if userActivity}}
+  {{#if userActivity}}
 
-        {{#each userActivity}}
-            <h2 id="{{title}}">{{title}}</h2>
-                <div>
-                    <p>{{description}}</p>
-                    <p>{{location}}</p>
-                </div>
-        {{/each}}
+    {{#each userActivity}}
+      <h2 id="{{title}}">{{title}}</h2>
+      <div>
+        <p>{{description}}</p>
+        <p>{{itemLocation}}</p>
+      </div>
+    {{/each}}
 
-    {{/if}}
+  {{/if}}
 </div>
