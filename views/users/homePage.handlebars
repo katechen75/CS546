@@ -1,93 +1,102 @@
 <a href="/private">Click to View User Page</a>
-<link rel="stylesheet" href="/public/css/homePage.css"/>
-    <div>
-        
-        <p class='intro'>A place for furniture & household items that have no home.</p>
-      <div class='search-box'>
-        <form method="POST" action="/sortPosts" id="sortPost">
-            <div class='sort'>
-                <label for="sortPost">Sort Posts By:</label>
-                <select name="sortPost" id="sortPost">
-                    <optgroup label= Availability>
-                        <option value="Available">Available</option>
-                        <option value="Taken">Taken</option>
-                    </optgroup>
-                    <optgroup label= Date Posted>
-                        <option value="Newest">Newest</option>
-                        <option value="Oldest">Oldest</option>
-                    </optgroup>
-                    <optgroup label= Date Posted>
-                        <option value="Furniture">Furniture</option>
-                        <option value="Household">Household</option>
-                    </optgroup>
-                        <option value="Show All">Show All</option>
-                </select>
-                <button type="submit" value="submit" onclick="myFunction()">Submit</button>
-            </div>
-        </form>
+<link rel="stylesheet" href="/public/css/homePage.css" />
+<div>
 
-        <form method="POST" action="/search" id="search-form">
-        
-            <div class='search'>
-                <label for="search_item">Search Item:</label>
-                <input type="text" name="search_item" id="search_item"/>
-            </div>
+  <p class="intro">A place for furniture & household items that have no home.</p>
+  <div class="search-box">
+    <form method="POST" action="/sortPosts" id="sortPost">
+      <div class="sort">
+        <label for="sortPost">Sort Posts By:</label>
+        <select name="sortPost" id="sortPost">
+          <optgroup label="Availability">
+            <option value="Available">Available</option>
+            <option value="Taken">Taken</option>
+          </optgroup>
+          <optgroup label="Date" Posted>
+            <option value="Newest">Newest</option>
+            <option value="Oldest">Oldest</option>
+          </optgroup>
+          <optgroup label="Date" Posted>
+            <option value="Furniture">Furniture</option>
+            <option value="Household">Household</option>
+          </optgroup>
+          <option value="Show All">Show All</option>
+        </select>
+        <button
+          type="submit"
+          value="submit"
+          onclick="myFunction()"
+        >Submit</button>
+      </div>
+    </form>
 
-            <button type="submit" value="submit">Search</button>
-        </form>
+    <form method="POST" action="/search" id="search-form">
 
-        {{#if error}}
-            <div>
-                <p>{{error}}</p>
-            </div>
-        {{/if}}
+      <div class="search">
+        <label for="search_item">Search Item:</label>
+        <input type="text" name="search_item" id="search_item" />
       </div>
 
-      <div class='posts-box'>
-        {{#each posts}}
-            <h2 id="{{title}}">{{title}}</h2>
-                <div>
-                    <p>{{description}}</p>
-                    <p>{{location}}</p>
-                    <p>{{poster.name}}</p>
-                    <p>{{availability}}</p>
-                </div>
+      <button type="submit" value="submit">Search</button>
+    </form>
 
-            <form method="POST" action="/updatePost/{{_id}}" id="updatepost_form">
-                <div class='update'>
-                    <label for="updatepost_form">Change Item Availability:</label>
-                    <select name="updatepost_form" id="updatepost_form">
-                        <option value="Available">Available</option>
-                        <option value="Taken">Taken</option>
-                        <option value="OMW">On My Way</option>
-                    </select>
-                    <button type="submit" value="submit">Submit</button>
-                </div>
-            </form>
+    {{#if error}}
+      <div>
+        <p>{{error}}</p>
+      </div>
+    {{/if}}
+  </div>
 
-            <form method="POST" action="/comments/{{_id}}" id="comment_form">
-            
-                <div class='comment'>
-                    <label for="comment_form">Add Comment:</label>
-                    <input type="text" name="comment_form" id="comment_form"/>
-                    <button type="submit" value="submit">Submit</button>
-                </div>
+  <div class="posts-box">
+    {{#each posts}}
+      <h2 id="{{title}}">{{title}}</h2>
+      <div>
+        <p>{{description}}</p>
+        <p>{{location}}</p>
+        <p>{{poster.name}}</p>
+        <p>{{availability}}</p>
+      </div>
 
-            </form>
+      <form method="POST" action="/updatePost/{{_id}}" id="updatepost_form">
+        <div class="update">
+          <label for="updatepost_form">Change Item Availability:</label>
+          <select name="updatepost_form" id="updatepost_form">
+            <option value="Available">Available</option>
+            <option value="Taken">Taken</option>
+            <option value="OMW">On My Way</option>
+          </select>
+          <button type="submit" value="submit">Submit</button>
+        </div>
+      </form>
 
-            {{#each comments}}
-                    <div>
-                        <table>
-                            <tr>
-                                <th>{{commentDate}}</th>
-                                <th>{{userId}}</th>
-                                <th>{{text}}</th>
-                            </tr>
-                        </table>
-                    </div>
-            {{/each}}
+      <form method="POST" action="/comments/{{_id}}" id="comment_form">
 
-        {{/each}}
-    </div>
-        <script src="/public/js/hbh.js"></script>
-    </div>
+        <div class="comment">
+          <label for="comment_form">Add Comment:</label>
+          <input type="text" name="comment_form" id="comment_form" />
+          <button type="submit" value="submit">Submit</button>
+        </div>
+
+      </form>
+
+      {{#each comments}}
+        <div>
+          <table>
+            <tr>
+              <th>{{commentDate}}</th>
+              <th>{{userId}}</th>
+              <th>{{text}}</th>
+            </tr>
+          </table>
+        </div>
+      {{/each}}
+
+    {{/each}}
+  </div>
+  <script src="/public/js/hbh.js"></script>
+</div>
+<script
+  src="/public/js/maps.js"
+  latitude={{item.latitude}}
+  longitude={{item.longitude}}
+></script>
