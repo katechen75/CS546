@@ -150,9 +150,12 @@ let exportedMethods = {
     if (post.length > 1){
       if ((availability.toLowerCase() == 'newest') || (availability.toLowerCase() == 'oldest')){
         if (availability.toLowerCase() == 'newest'){
-          sortPost.sort((a, b) => (a.dateposted > b.dateposted) ? 1 : -1);
+          post.sort((a, b) => (a.dateposted > b.dateposted) ? 1 : -1);
+          return post;
         } else {
-          sortPost.sort((a, b) => (a.dateposted < b.dateposted) ? 1 : -1);
+          post.sort((a, b) => (a.dateposted < b.dateposted) ? 1 : -1);
+          return post;
+
         }
       }
     }
