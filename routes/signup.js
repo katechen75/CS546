@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const userdata = require('../data/users')
+const userdata = require("../data/users");
 
 router.get("/", async (req, res) => {
   try {
@@ -10,29 +10,31 @@ router.get("/", async (req, res) => {
   }
 });
 
-
-
-router.post('/', async (req, res) => {
-        const signupName = req.body.username;
-        const signupPW = req.body.password1;
-        const email = req.body.email;
-        const city = req.body.city;
-        let gender ='Unknown'
-        if(!req.body.gender){
-           gender = 'Unknown'
-        }
-        else{
-           gender = req.body.gender;
-        }
-  try {        
-      const signuptest = await userdata.addUser(signupName,signupPW,email,gender,city)
-          if(signuptest=='{userInserted:true}'){
-          res.redirect('/');
-         }
-        }
-    catch(e) {
-      res.render('users/signupPage',{ title: "Sign Up Page" , hasErrors: true}) 
+router.post("/", async (req, res) => {
+  const signupName = req.body.username;
+  const signupPW = req.body.password1;
+  const email = req.body.email;
+  const city = req.body.city;
+  let gender = "Unknown";
+  if (!req.body.gender) {
+    gender = "Unknown";
+  } else {
+    gender = req.body.gender;
+  }
+  try {
+    const signuptest = await userdata.addUser(
+      signupName,
+      signupPW,
+      email,
+      gender,
+      city
+    );
+    if (signuptest == "{userInserted:true}") {
+      res.redirect("/");
     }
-      });
+  } catch (e) {
+    res.render("users/signupPage", { title: "Sign Up Page", hasErrors: true });
+  }
+});
 
 module.exports = router;
