@@ -1,5 +1,5 @@
 // Derived from the Google Maps JS API documentation
-
+const zipcodes = require("zipcodes");
 let script = document.createElement("script");
 script.src =
   "https://maps.googleapis.com/maps/api/js?key=AIzaSyBEPhJJDBFNxN16BquzYkvcwG0ib-z5XoA&callback=initMap";

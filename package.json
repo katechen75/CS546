@@ -30,6 +30,7 @@
     "multer": "^1.4.4",
     "multer-gridfs-storage": "^4.2.0",
     "node": "^17.2.0",
-    "uuid": "^3.4.0"
+    "uuid": "^3.4.0",
+    "zipcodes": "^8.0.0"
   }
 }
