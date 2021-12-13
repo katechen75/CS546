@@ -44,7 +44,7 @@
     if (!passwordStr) {
       submit_check = false;
       passAlert.show();
-      passAlert.html("Please enter password");
+      passAlert.html("You must enter password");
       return;
     } else {
       passAlert.hide();
