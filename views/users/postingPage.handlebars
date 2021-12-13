@@ -37,18 +37,24 @@
                 <input type="file" name="item_image" id="item_image"/>
             </div>
 
-            <div class='location'>
+            {{!-- <div class='location'>
                 <label for="item_location">Item Location:</label>
                 <input type="text" name="item_location" id="item_location"/>
-            </div>
+            </div> --}}
+<div id="gmap" style="height:400px; width:100%;"></div>
+
+
             
             <button type="submit" value="submit">Post</button>
         </form>
 
-        
+       
+
 
         <p>{{files}}</p>
     </div>
+
+<script src="/public/js/maps.js" latitude={{restaurant.latitude}} longitude={{restaurant.longitude}}></script>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
         crossorigin="anonymous"></script>
