@@ -11,6 +11,9 @@ let cityState = currentLoc.city + ", " + currentLoc.state;
 let latitude = currentLoc.latitude;
 let longitude = currentLoc.longitude;
 
+const latitude = parseFloat(document.currentScript.getAttribute("latitude"));
+const longitude = parseFloat(document.currentScript.getAttribute("longitude"));
+
 window.initMap = function () {
   let gmap = new google.maps.Map(document.getElementById("gmap"), {
     center: { lat: latitude, lng: longitude },
