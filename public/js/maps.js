@@ -5,6 +5,7 @@ script.src =
   "https://maps.googleapis.com/maps/api/js?key=AIzaSyBEPhJJDBFNxN16BquzYkvcwG0ib-z5XoA&callback=initMap";
 script.defer = true;
 script.async = false;
+
 let currentLoc = zipcodes.lookup(posts.itemLocation);
 let cityState = currentLoc.city + ", " + currentLoc.state;
 let latitude = currentLoc.latitude;
