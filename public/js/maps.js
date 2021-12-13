@@ -7,7 +7,7 @@ script.async = false;
 let currentLoc = zipcodes.lookup(posts.itemLocation);
 let cityState = currentLoc.city + ", " + currentLoc.state;
 let latitude = currentLoc.latitude;
-const longitude = currentLoc.longitude;
+let longitude = currentLoc.longitude;
 
 window.initMap = function() {
     let gmap = new google.maps.Map(document.getElementById('gmap'), {
