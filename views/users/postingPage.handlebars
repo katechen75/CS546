@@ -7,13 +7,13 @@
             </div>
         {{/if}} --}}
   <h1>Make A Post!</h1>
-<<<<<<< Updated upstream
-  <img src="public/hobokencurbside_logo.png" />
-  <form method="POST" action="/posting" id="posting-form">
-=======
-  <img src="public\\\\\\\hobokencurbside_logo.png" />
-  <form method="POST" action="/posting" id="posting-form",enctype="multipart/form-data">
->>>>>>> Stashed changes
+  <img src="public\\\\\\\\hobokencurbside_logo.png" />
+  <form
+    method="POST"
+    action="/posting"
+    id="posting-form"
+    ,enctype="multipart/form-data"
+  >
 
     <div class="title">
       <label for="title">Item Name:</label>
@@ -37,17 +37,10 @@
                 <input type="button" name="item_category" id="item_category" value="House Hold" onclick="clickedF()"/> }}
     </div>
 
-<<<<<<< Updated upstream
-    {{! <div class="image">
-      <label for="item_image">Item Image:</label>
-      <input type="file" name="item_image" id="item_image" />
-    </div> }}
-=======
     <div class="image">
       <label for="item_image">Item Image:</label>
       <input type="file" name="item_image" id="item_image" />
     </div>
->>>>>>> Stashed changes
 
     <div class="location">
       <label for="itemLocation">Item Location:</label>
@@ -56,7 +49,6 @@
     </div>
 
     <button type="submit" value="submit">Post</button>
-<<<<<<< Updated upstream
 
   </form>
   <div class="myprofile-innercard">
@@ -80,13 +72,6 @@
     </form>
   </div>
 
-=======
-  
-  {{!-- </form> --}}
-    
-              
-</form>
->>>>>>> Stashed changes
   <p>{{files}}</p>
 </div>
 
